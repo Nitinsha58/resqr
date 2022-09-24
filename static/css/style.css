@@ -28,8 +28,8 @@
   box-sizing: border-box;
 }
 
-body {
-  font-family: "Poppins", sans-serif;
+*, body {
+  font-family: 'Poppins', sans-serif;
 }
 
 .stop-scrolling {
@@ -85,6 +85,11 @@ header .container {
   display: flex;
   align-items: center;
   cursor: pointer;
+}
+
+.logo a {
+  color: var(--darkTwo);
+  
 }
 
 .logo img {

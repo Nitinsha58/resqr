@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/accounts.css' %}">
+{% endblock style %}
+
+
+{% block content %}
+<div class="login-container">
+    <div class="header-bar"></div>
+    <div class="form-image-container sign-up-container">
+        <div class="form-container">
+            <div class="form-content-container">
+                <h1 class="form-heading">Sign Up</h1>
+                <p class="form-title">Enter your details below to continue</p>
+
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{form.non_field_errors}}
+
+                    <div class="form-label-field">
+                        <label for="id_username" class="form-label">Username</label>
+
+                        {% if form.username.errors %}
+                        <p class="error-text">{{ form.username.errors.as_text|cut:"* " }}</p>
+                        {% endif %}
+                        <div class="field-container">
+                            <div class="field-icon-container">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="field-icon" viewBox="0 0 18 22" fill="#1E283C">
+                                    <path d="M9.20511 11.1113C10.291 11.1113 11.3525 10.7893 12.2553 10.186C13.1582 9.58273 13.8619 8.72526 14.2775 7.72204C14.693 6.71883 14.8017 5.61492 14.5899 4.54991C14.3781 3.48491 13.8552 2.50663 13.0873 1.73881C12.3195 0.970977 11.3412 0.448075 10.2762 0.236232C9.21121 0.0243885 8.1073 0.133122 7.10409 0.548667C6.10087 0.964213 5.2434 1.66791 4.64012 2.57078C4.03684 3.47365 3.71484 4.53514 3.71484 5.62102C3.71484 7.07713 4.29328 8.4736 5.3229 9.50323C6.35253 10.5329 7.749 11.1113 9.20511 11.1113ZM9.20511 2.2646C9.87098 2.2646 10.5219 2.46206 11.0755 2.83199C11.6292 3.20192 12.0607 3.72772 12.3155 4.34289C12.5703 4.95807 12.637 5.63499 12.5071 6.28806C12.3772 6.94113 12.0565 7.54101 11.5857 8.01184C11.1149 8.48268 10.515 8.80332 9.86192 8.93323C9.20885 9.06313 8.53193 8.99646 7.91676 8.74165C7.30158 8.48683 6.77577 8.05532 6.40584 7.50167C6.0359 6.94803 5.83846 6.29713 5.83846 5.63127C5.83834 5.18912 5.92533 4.75127 6.09448 4.34275C6.26363 3.93424 6.51161 3.56304 6.82425 3.25039C7.1369 2.93775 7.5081 2.68977 7.91661 2.52062C8.32513 2.35147 8.76296 2.26448 9.20511 2.2646V2.2646Z" />
+                                    <path d="M9.20546 13.7054C7.06402 13.6592 4.96682 14.3187 3.23716 15.5821C2.48803 16.1157 1.87478 16.818 1.44683 17.6321C1.01888 18.4462 0.788218 19.3495 0.773438 20.2692C0.773438 20.7099 1.2496 21.0668 1.83571 21.0677H16.5761C17.1623 21.0677 17.6366 20.7099 17.6384 20.2692C17.6236 19.3495 17.393 18.4462 16.965 17.6321C16.5371 16.818 15.9238 16.1157 15.1747 15.5821C13.4448 14.3184 11.3472 13.659 9.20546 13.7054V13.7054ZM2.9716 19.4706C3.19819 18.3562 3.83504 17.3675 4.75603 16.7003C6.06151 15.7908 7.61438 15.3031 9.20546 15.3031C10.7965 15.3031 12.3494 15.7908 13.6549 16.7003C14.5742 17.369 15.2106 18.357 15.4393 19.4706H2.9716Z"/>
+                                </svg>    
+                            </div>
+                            <div class="vertical-divider"></div>
+                            {{form.username}}
+                        </div>
+                        <p id="help-text-username" class="help-text">{{form.username.help_text }}</p>
+                    </div>
+
+                    <div class="form-label-field">
+                        <label for="id_name" class="form-label">Email Address</label>
+
+                        {% if form.email.errors %}
+                        <p class="error-text">{{form.email.errors.as_text|cut:"* " }}</p>
+                        {% endif %}
+                        
+                        <div class="field-container">
+                            <div class="field-icon-container">
+                                <svg xmlns="http://www.w3.org/2000/svg"class="field-icon" viewBox="0 0 18 14" fill="#1E283C">
+                                    <path d="M17.6237 1.54089V12.2242C17.6263 12.3651 17.6006 12.5051 17.5479 12.6359C17.4952 12.7666 17.4168 12.8854 17.3172 12.9852C17.2176 13.0849 17.099 13.1636 16.9683 13.2165C16.8377 13.2694 16.6977 13.2954 16.5568 13.293H15.487V3.59648L9.07705 8.19966L2.66614 3.59648V13.293H1.59828C1.45719 13.2956 1.31702 13.2698 1.18615 13.217C1.05527 13.1643 0.936389 13.0856 0.836608 12.9859C0.736827 12.8861 0.658199 12.7672 0.605428 12.6363C0.552656 12.5054 0.526826 12.3653 0.529483 12.2242V1.54089C0.526957 1.39984 0.552876 1.25972 0.605694 1.12891C0.658511 0.998094 0.737144 0.879263 0.836899 0.779508C0.936653 0.679754 1.05548 0.601121 1.1863 0.548303C1.31711 0.495485 1.45723 0.469566 1.59828 0.472092H1.95423L9.07705 5.63623L16.1989 0.472092H16.5568C16.6978 0.469566 16.8379 0.495485 16.9687 0.548303C17.0995 0.601121 17.2184 0.679754 17.3181 0.779508C17.4179 0.879263 17.4965 0.998094 17.5493 1.12891C17.6022 1.25972 17.6281 1.39984 17.6255 1.54089H17.6237Z"  />
+                                </svg>    
+                            </div>
+                            <div class="vertical-divider"></div>
+                            {{form.email}}
+                        </div>
+                        <p id="help-text-email" class="help-text">{{form.email.help_text}}</p>
+                    </div>
+
+                    <div class="form-label-field">
+                        <label for="id_name" class="form-label">Password</label>
+
+                        {% if form.password1.errors %}
+                        <p class="error-text">{{ form.password1.errors.as_text|cut:"* " }}</p>
+                        {% endif %}
+
+                        <div class="field-container">
+                            <div class="field-icon-container">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="field-icon" viewBox="0 0 23 23" fill="#1E283C">
+                                    <path d="M17.0506 6.99556C17.8164 6.99556 18.4372 6.37479 18.4372 5.60902C18.4372 4.84325 17.8164 4.22247 17.0506 4.22247C16.2848 4.22247 15.6641 4.84325 15.6641 5.60902C15.6641 6.37479 16.2848 6.99556 17.0506 6.99556Z" />
+                                    <path d="M15.8415 0.4104C14.823 0.410883 13.8178 0.641458 12.9009 1.08491C11.984 1.52835 11.1791 2.17322 10.5464 2.97134C9.91369 3.76946 9.46945 4.70021 9.24687 5.69409C9.02429 6.68797 9.02913 7.71929 9.26101 8.71104L0.419922 17.5559V22.5877H5.96517V20.1649H8.3879V17.7422H10.8106V15.3195H12.7292L14.2928 13.7559C15.2189 13.9685 16.1795 13.9834 17.1118 13.7997C18.0441 13.616 18.9271 13.2378 19.7033 12.6897C20.4795 12.1416 21.1315 11.436 21.6165 10.619C22.1016 9.80189 22.409 8.89172 22.5185 7.94784C22.628 7.00396 22.5373 6.0476 22.2522 5.14116C21.9671 4.23472 21.4941 3.39858 20.8641 2.68731C20.234 1.97604 19.461 1.40562 18.5956 1.01329C17.7301 0.620957 16.7917 0.415525 15.8415 0.4104V0.4104ZM15.8415 12.1932C15.3207 12.1938 14.8029 12.1133 14.3068 11.9547L13.8036 11.7935L12.0173 13.5798H9.08583V16.0025H6.6631V18.4252H4.24038V20.848H2.1531V18.2706L11.2169 9.20676L11.0557 8.70358C10.7319 7.69385 10.7357 6.60755 11.0667 5.60014C11.3978 4.59274 12.039 3.71586 12.8986 3.095C13.7582 2.47414 14.7922 2.14112 15.8526 2.1436C16.913 2.14607 17.9455 2.48391 18.8022 3.10878C19.6589 3.73364 20.296 4.6135 20.6223 5.62244C20.9487 6.63138 20.9475 7.71768 20.6189 8.7259C20.2904 9.73411 19.6513 10.6126 18.7932 11.2355C17.9351 11.8585 16.9019 12.194 15.8415 12.1942V12.1932Z"/>
+                                </svg>
+                            </div>
+                            <div class="vertical-divider"></div>
+                            {{ form.password1 }}
+                        </div>
+                        <p id="help-text-pass1" class="help-text">{{ form.password1.help_text }}</p>
+                    </div>
+
+                    <div class="form-label-field">
+                        <label for="id_password2" class="form-label">Confirm Password</label>
+                        
+                        {% if form.password2.errors %}
+                        <p class="error-text">{{ form.password2.errors.as_text|cut:"* " }}</p>
+                        {% endif %}
+
+                        <div class="field-container">
+                            <div class="field-icon-container" >
+                                <svg xmlns="http://www.w3.org/2000/svg" class="field-icon" viewBox="0 0 23 23" fill="#1E283C">
+                                    <path d="M17.0506 6.99556C17.8164 6.99556 18.4372 6.37479 18.4372 5.60902C18.4372 4.84325 17.8164 4.22247 17.0506 4.22247C16.2848 4.22247 15.6641 4.84325 15.6641 5.60902C15.6641 6.37479 16.2848 6.99556 17.0506 6.99556Z"  />
+                                    <path d="M15.8415 0.4104C14.823 0.410883 13.8178 0.641458 12.9009 1.08491C11.984 1.52835 11.1791 2.17322 10.5464 2.97134C9.91369 3.76946 9.46945 4.70021 9.24687 5.69409C9.02429 6.68797 9.02913 7.71929 9.26101 8.71104L0.419922 17.5559V22.5877H5.96517V20.1649H8.3879V17.7422H10.8106V15.3195H12.7292L14.2928 13.7559C15.2189 13.9685 16.1795 13.9834 17.1118 13.7997C18.0441 13.616 18.9271 13.2378 19.7033 12.6897C20.4795 12.1416 21.1315 11.436 21.6165 10.619C22.1016 9.80189 22.409 8.89172 22.5185 7.94784C22.628 7.00396 22.5373 6.0476 22.2522 5.14116C21.9671 4.23472 21.4941 3.39858 20.8641 2.68731C20.234 1.97604 19.461 1.40562 18.5956 1.01329C17.7301 0.620957 16.7917 0.415525 15.8415 0.4104V0.4104ZM15.8415 12.1932C15.3207 12.1938 14.8029 12.1133 14.3068 11.9547L13.8036 11.7935L12.0173 13.5798H9.08583V16.0025H6.6631V18.4252H4.24038V20.848H2.1531V18.2706L11.2169 9.20676L11.0557 8.70358C10.7319 7.69385 10.7357 6.60755 11.0667 5.60014C11.3978 4.59274 12.039 3.71586 12.8986 3.095C13.7582 2.47414 14.7922 2.14112 15.8526 2.1436C16.913 2.14607 17.9455 2.48391 18.8022 3.10878C19.6589 3.73364 20.296 4.6135 20.6223 5.62244C20.9487 6.63138 20.9475 7.71768 20.6189 8.7259C20.2904 9.73411 19.6513 10.6126 18.7932 11.2355C17.9351 11.8585 16.9019 12.194 15.8415 12.1942V12.1932Z"  />
+                                </svg>
+                            </div>
+                            <div class="vertical-divider"></div>
+                            {{form.password2}}
+                        </div>
+                        <p id="help-text-pass2" class="help-text" >{{ form.password2.help_text }}</p>
+
+                        <input type="checkbox" name="" id="show-pass">
+                        <label class="show-pass" for="show-pass">Show password</label>
+                    </div>
+                    
+                    <input type="submit" class="btn submit-btn" value="Sign Up">
+                </form>
+
+                <p class="change-form-title">Already have an account? <a href="{% url 'login-user' %}" class="link">Sign in</a></p>
+            </div>
+        </div>
+        <div class="image-container">
+            <img src="{% static 'images/accounts/abstract-illustration.svg' %}" alt="abstract design illustration" class="illustration">
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block footer %}
+
+{% endblock footer %}
+
+{% block script %}
+
+
+<script>
+    document.getElementById('show-pass').addEventListener('click', ()=>{
+        var checkBox = document.getElementById('show-pass')
+        var pass1 = document.getElementById('id_password1')
+        var pass2 = document.getElementById('id_password2')
+        if (checkBox.checked == true) {
+            pass1.attributes.type.value = "text"
+            pass2.attributes.type.value = "text"
+        }else {
+            pass1.attributes.type.value = "password"
+            pass2.attributes.type.value = "password"
+        }
+    })
+
+    let username = document.getElementById('id_username')
+    let email = document.getElementById('id_email')
+    let pass1 = document.getElementById('id_password1')
+    let pass2 = document.getElementById('id_password2')
+
+    username.classList.add('field', 'form-field-input');
+    email.classList.add('field', 'form-field-input');
+    pass1.classList.add('field', 'form-field-input');
+    pass2.classList.add('field', 'form-field-input');
+    
+    help_txt_username = document.getElementById('help-text-username')
+    help_txt_email = document.getElementById('help-text-email')
+    help_txt_pass1 = document.getElementById('help-text-pass1')
+    help_txt_pass2 = document.getElementById('help-text-pass2')
+    
+    function show_help_text(input_field, help_text) {
+        input_field.addEventListener('focusin', (event) => {
+            help_text.style.display = 'block';
+        });
+        
+        input_field.addEventListener('focusout', (event) => {
+            help_text.style.display = 'none';
+        });
+    }
+
+    show_help_text(username, help_txt_username);
+    show_help_text(email, help_txt_email);
+    show_help_text(pass1, help_txt_pass1);
+    show_help_text(pass2, help_txt_pass2);
+</script>
+
+{% endblock script %}

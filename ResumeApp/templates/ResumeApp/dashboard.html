@@ -1,0 +1,105 @@
+{% load static %}
+
+{% url 'dashboard' as dashboard_url %}
+{% url 'home' as home_url %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"> 
+    
+    
+    {% block style %}
+        <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+        <link rel="stylesheet" href="{% static 'css/resume-dash.css' %}">
+    {% endblock style %}
+
+    <title>{% block title %}{% endblock title %}</title>
+</head>
+
+<body>
+    <div class="hamburger">
+        <div class="bar"></div>
+    </div>
+    <div class="dashboard-container">
+        <aside id="mobile-menu" class="dashboard-navigation-container">
+            <div class="profile-container">
+                <!-- <img class="profile-image" src="{% static 'images/Dashboard/profile-img.webp' %}" alt="" > -->
+                <a class="profile-image-container" href="{% url 'home' %}">
+                    <p>ResQR</p>
+                </a>
+                <p class="user-title">Admin Dashboard</p>
+                <p class="username">{{request.user.username}}</p>
+            </div>
+
+            <a href="{% url 'dashboard' %}" class="side-nav-link {% if dashboard_url == request.path  %}active-nav{% endif %}">
+                <div class="left-vertical-line {% if dashboard_url == request.path  %}active-line{% endif %}"></div>
+                <div class="icon-title-container">
+                    <img class="nav-link-icon" src="{% static 'images/Dashboard/receipt.svg' %}" alt="">
+                    <p class="side-nav">Dashboard</p>
+                </div>
+            </a>
+            <a href="{% url 'home' %}" class="side-nav-link {% if home_url == request.path  %}active-nav{% endif %}">
+                <div class="left-vertical-line {% if home_url == request.path  %}active-line{% endif %}"></div>
+                <div class="icon-title-container">
+                    <img class="nav-link-icon" src="{% static 'images/Dashboard/home-icon.svg' %}" alt="">
+                    <p class="side-nav">Home</p>
+                </div>
+            </a>
+
+
+            <a href="{% url 'logout-user' %}" class="side-nav-link {% if admin_url in request.path %}active-nav{% endif %}">
+                <div class="left-vertical-line {% if admin_url in request.path %}active-nav{% endif %}"></div>
+                <div class="icon-title-container">
+                    <img class="nav-link-icon" src="{% static 'images/Dashboard/logout.svg' %}" alt="">
+                    <p class="side-nav">Logout</p>
+                </div>  
+            </a>
+
+        </aside>
+        <div class="content-container">
+            {% if messages %}
+                {% for message in messages %}
+                <div class="notify-container">
+                    <div onclick="toggle()" class="alert show-alert">
+                        <span class="msg">{{message}}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endif %}
+            {% block content %}
+            <div class="heading-and-create-btn-container">
+                <h1 class="edit-title"><a class="heading-link" href="">Resumes</a> </h1>
+                <a href="" class="link">Create new</a>
+            </div>
+        
+            <div class="content">
+                    {% if resumes %}
+                        {% for resume in resumes %}
+                            <div class="row-container">
+                                <div class="column-value-container">
+                                    <a href="" class="link column-value">{{resume.name}}</a>
+                                </div>
+                                <div class="column-value-container">
+                                    <p class="column-value">{{resume.phone}}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+        
+        {% endblock content %}
+        </div>
+    </div>
+
+    {% block script %}
+    {% endblock script %}
+    <script src="{% static 'js/dashboard.js' %}"></script>
+</body>
+</html>

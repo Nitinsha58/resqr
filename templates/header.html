@@ -1,15 +1,17 @@
 <header>
     <div class="container">
       <div class="logo">
-        <h3>ResQR</h3>
+        <h3><a href="{% url 'home' %}">ResQR</a></h3>
       </div>
 
       <div class="links">
         <ul>
-            <li><a href="#">Features</a></li>
-            <li><a href="#">Pricing</a></li>
-            <li><a href="#">Testimonials</a></li>
-            <li><a href="#" class="btn">Sign up</a></li>
+            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            {% if request.user.is_authenticated %}
+              <li><p>Hello, {{request.user.username}}</p></li>
+            {% else %}
+              <li><a href="{% url 'register-user' %}" class="btn">Sign up</a></li>
+            {% endif %}
         </ul>
       </div>
 

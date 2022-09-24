@@ -3,9 +3,16 @@ from django.db import models
 from django.contrib.auth.models import User
 from phonenumber_field.modelfields import PhoneNumberField
 
+
 class PersonalInfo(models.Model):
+    TEMPLATE_LIST = (
+        (1, "Template 1"),
+        (2, "Template 2"),
+    )
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE, related_name="personal_info")
+    template = models.CharField(max_length=65, choices=TEMPLATE_LIST, null=True, default=1, blank=False)
     name = models.CharField(max_length=65, null=True, blank=True)
     email = models.EmailField(max_length=255, null=True )    
     phone = PhoneNumberField(blank=False, null=False)
@@ -40,3 +47,4 @@ class Education(models.Model):
 
     def __str__(self):
         return self.title
+
